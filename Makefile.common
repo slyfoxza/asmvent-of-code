@@ -1,0 +1,11 @@
+.PHONY: all clean
+
+PROGRAMS := 2020-01-1
+
+all: $(PROGRAMS)
+
+clean:
+	$(RM) *.o $(PROGRAMS)
+
+%.o: %.$(ARCHITECTURE).s
+	$(AS) $(ASFLAGS) -o $@ $^

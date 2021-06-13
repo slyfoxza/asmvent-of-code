@@ -1,0 +1,19 @@
+The gist of the algorithm is to consider all pairwise combinations of the input
+and evaluate their sum against the target value (2020). For the combination
+that satisfies that condition, the product is calculated and yielded as the
+result.
+
+Naively, it's an O(n^2) nested loop, but if you consider that addition is
+commutative, we can improve slightly by making the range of the inner loop be
+only elements after the index of the outer loop:
+
+    for(i = 0; i < n - 1; ++i) {
+      for(j = i + 1; j < n; ++j) {
+        ...
+
+That is, if we've already considered the sum of input[i=2] and input[j=3],
+there is no point in revisiting it via input[i=3] + input[j=2].
+
+This approach also has the desirable property of ensuring we don't consider the
+sum of an element with itself (that is, when i=j), given we're looking for two
+_separate_ entries.

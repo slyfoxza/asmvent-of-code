@@ -1,0 +1,4 @@
+#!/bin/awk -f
+BEGIN { ORS=""; sep=""; print "input:\n.int" }
+{ print sep, $1; sep="," }
+END { print "\n" }
