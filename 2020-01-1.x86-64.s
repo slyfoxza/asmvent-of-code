@@ -2,15 +2,13 @@
 
 .text
 .include "2020-01.txt.s"
-.set max_iter_b, (. - input) / 2
+.set max_iter_b, (. - input) / 4
 .set max_iter_a, max_iter_b - 1
 format_string: .asciz "%d\n"
 error_string: .asciz "Error: no result found!\n"
 
 .global main
 main:
-	xor edi, edi
-
 	# Since the very first instruction after the loop_a_start label is going to
 	# be an INC ESI, initialise ESI to all bits 1, so that the increment will
 	# overflow to zero, starting the first iteration as desired.
