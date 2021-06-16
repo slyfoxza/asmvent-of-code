@@ -1,0 +1,22 @@
+Since this implementation has structured data for the input, a custom script is
+used to similarly structure it in program memory. Viewed as a C structure:
+
+    struct {
+      uint8_t lowerBound;
+      uint8_t upperBound;
+      char target;
+      uint8_t passwordLength;
+      char password[passwordLength];
+    };
+
+Note that the password string is not zero-terminated, since the exact length is
+encoded as a prefix.
+
+The algorithm is to simply iterate over each input structure (implying a
+terminator value is required to indicate the end of the input), iterate over
+each character in each password string, and count the number of characters that
+match the iteration's target. If the character count satisfies the lower and
+upper bounds, a counter for valid passwords is incremented.
+
+Once all input structures have been evaluated, we should have the answer we're
+looking for.
