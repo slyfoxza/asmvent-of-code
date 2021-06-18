@@ -1,0 +1,4 @@
+This part is a slight modification of the first, in that the loop body no
+longer needs to scan through the full password string. Instead, we only need to
+perform two indexed retrievals into the string, and compare them against a
+target value.
