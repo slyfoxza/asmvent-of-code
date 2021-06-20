@@ -5,7 +5,15 @@ PROGRAMS := $(subst .$(ARCHITECTURE).s,,$(wildcard ????-??-?.$(ARCHITECTURE).s))
 all: $(PROGRAMS)
 
 clean:
-	$(RM) *.o $(PROGRAMS)
+	$(RM) *.inc *.o $(PROGRAMS)
+
+$(addsuffix .$(ARCHITECTURE).s,$(filter %-1,$(PROGRAMS))): %-1.$(ARCHITECTURE).s: %.inc
+$(addsuffix .$(ARCHITECTURE).s,$(filter %-2,$(PROGRAMS))): %-2.$(ARCHITECTURE).s: %.inc
 
 %.o: %.$(ARCHITECTURE).s
 	$(AS) $(ASFLAGS) -o $@ $^
+
+%.inc: %.txt txt2bin-%
+	./txt2bin-$* $< > $@
+
+2020-01.inc: 2020-01.txt txt2ints; ./txt2ints $< > $@

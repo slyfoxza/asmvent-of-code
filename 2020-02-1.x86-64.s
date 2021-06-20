@@ -1,7 +1,7 @@
 .intel_syntax noprefix
 
 .text
-.include "2020-02.txt.s"
+.include "2020-02.inc"
 .Lend_input: .byte 0
 format_string: .asciz "%d\n"
 

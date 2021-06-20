@@ -65,5 +65,5 @@ main:
 
 .section .rodata
 .Lformat_string: .asciz "%d\n"
-.include "2020-02.txt.s"
+.include "2020-02.inc"
 .Lend_input: .byte 0

@@ -56,7 +56,7 @@ main:
 
 	mov r0, $1; pop {r4-r7, pc}  @ return 1
 
-.include "2020-01.txt.s"
+.include "2020-01.inc"
 .set max_iter_c, (. - input) / 4
 .set max_iter_b, max_iter_c - 1
 .set max_iter_a, max_iter_b - 1

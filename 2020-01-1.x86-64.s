@@ -61,6 +61,6 @@ main:
 .section .rodata
 format_string: .asciz "%d\n"
 error_string: .asciz "Error: no result found!\n"
-.include "2020-01.txt.s"
+.include "2020-01.inc"
 .set max_iter_b, (. - input) / 4
 .set max_iter_a, max_iter_b - 1
