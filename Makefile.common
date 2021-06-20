@@ -1,14 +1,18 @@
 .PHONY: all clean
 
 PROGRAMS := $(subst .$(ARCHITECTURE).s,,$(wildcard ????-??-?.$(ARCHITECTURE).s))
+REF_PROGRAMS := $(subst .c,,$(wildcard ????-??-?-ref.c))
 
-all: $(PROGRAMS)
+all: $(PROGRAMS) $(REF_PROGRAMS)
 
 clean:
-	$(RM) *.inc *.o $(PROGRAMS)
+	$(RM) *.inc *.o $(PROGRAMS) $(REF_PROGRAMS)
 
 $(addsuffix .$(ARCHITECTURE).s,$(filter %-1,$(PROGRAMS))): %-1.$(ARCHITECTURE).s: %.inc
 $(addsuffix .$(ARCHITECTURE).s,$(filter %-2,$(PROGRAMS))): %-2.$(ARCHITECTURE).s: %.inc
+
+$(REF_PROGRAMS): %: %.c
+	$(CC) -fopt-info-all -g -march=sandybridge -O3 -o $@ $<
 
 %.o: %.$(ARCHITECTURE).s
 	$(AS) $(ASFLAGS) -o $@ $^
