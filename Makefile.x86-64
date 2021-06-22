@@ -1,3 +1,4 @@
 ARCHITECTURE := x86-64
 ASFLAGS += --64
+CFLAGS_REF := -march=sandybridge
 include Makefile.common

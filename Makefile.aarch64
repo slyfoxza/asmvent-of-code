@@ -1,2 +1,5 @@
 ARCHITECTURE := aarch64
+AS := gcc10-as
+CC := gcc10-cc
+CFLAGS_REF := -march=armv8.2-a+fp16+rcpc+dotprod+crypto
 include Makefile.common

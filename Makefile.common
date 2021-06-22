@@ -12,7 +12,7 @@ $(addsuffix .$(ARCHITECTURE).s,$(filter %-1,$(PROGRAMS))): %-1.$(ARCHITECTURE).s
 $(addsuffix .$(ARCHITECTURE).s,$(filter %-2,$(PROGRAMS))): %-2.$(ARCHITECTURE).s: %.inc
 
 $(REF_PROGRAMS): %: %.c
-	$(CC) -fopt-info-all -g -march=sandybridge -O3 -o $@ $<
+	$(CC) -fopt-info-all -g $(CFLAGS_REF) -O3 -o $@ $<
 
 %.o: %.$(ARCHITECTURE).s
 	$(AS) $(ASFLAGS) -o $@ $^
