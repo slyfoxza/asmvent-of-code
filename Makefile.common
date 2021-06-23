@@ -24,4 +24,5 @@ $(REF_PROGRAMS): %: %.c
 2020-01.inc: 2020-01.txt txt2ints; ./txt2ints $< > $@
 
 2018-01-1-ref.c: 2018-01-ref.h
+2018-01-2-ref.c: 2018-01-ref.h
 2018-01-ref.h: 2018-01.txt txt2ints-ref; ./txt2ints-ref $< > $@
