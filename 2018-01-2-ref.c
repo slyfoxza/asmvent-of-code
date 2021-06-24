@@ -7,7 +7,7 @@
 #include "2018-01-ref.h"
 
 int main(int argc, char **argv) {
-	int32_t *seen = NULL;
+	int32_t *seen = malloc(sizeof(input));
 	size_t nSeen = 0;
 
 	int32_t frequency = 0;
@@ -31,7 +31,6 @@ int main(int argc, char **argv) {
 			j = (high - low) / 2 + low;
 		}
 		if(insert && (low > high)) {
-			seen = realloc(seen, (nSeen + 1) * sizeof(*seen));
 			memmove(seen + low + 1, seen + low, (nSeen - low) * sizeof(*seen));
 			seen[low] = frequency;
 			++nSeen;
