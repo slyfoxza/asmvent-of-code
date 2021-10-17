@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+mapping = {
+  '2015-01' => :str
+}
+
+mapping.each do |day, type|
+  %w[1 2].each { |part| puts "#{day}-#{part}-ref.c: #{day}-ref.h" }
+  puts "#{day}-ref.h: #{day}.txt txt2#{type}-ref; ./txt2#{type}-ref $< > $@"
+end
