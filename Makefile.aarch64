@@ -1,0 +1,4 @@
+ARCHITECTURE := aarch64
+AS := gcc10-as
+CC := gcc10-cc
+include Makefile.common
