@@ -7,13 +7,13 @@ main:
 	# argument that will be passed to printf.
 	xor esi, esi
 
-	# R14 and R15 will hold the addresses of the first and last input bytes,
+	# R10 and R11 will hold the addresses of the first and last input bytes,
 	# respectively.
-	lea r14, [rip + .Linput]
-	lea r15, [rip + input_end]
+	lea r10, [rip + .Linput]
+	lea r11, [rip + input_end]
 .Lloop_start:
-	# if (*r14 == '(')
-	cmp byte ptr [r14], 0x28
+	# if (*r10 == '(')
+	cmp byte ptr [r10], 0x28
 	# Instead of writing an if/else with JMPs, this calculates both ESI+1 and
 	# ESI-1 into ESI and EAX, respectively. This assumes that the increment
 	# path will be taken, and then uses the CMOVNZ conditional move to
@@ -22,10 +22,10 @@ main:
 	lea esi, [esi + 1]
 	cmovnz esi, eax
 
-	# Increment the R14 "pointer", and conditionally jump to the loop start if
+	# Increment the R10 "pointer", and conditionally jump to the loop start if
 	# it hasn't reached the end of the input yet.
-	inc r14
-	cmp r14, r15
+	inc r10
+	cmp r10, r11
 	jnz .Lloop_start
 
 	# Reminder: ESI already contains the integer value we want to print, so we
