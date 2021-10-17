@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+# Converts the first line of the input file to an unterminated string.
+puts %Q(.Linput: .ascii "#{ARGF.readline.strip}")
+puts '.set input_end, .'

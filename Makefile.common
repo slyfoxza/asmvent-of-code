@@ -1,16 +1,20 @@
 .PHONY: all clean
 
+PROGRAMS := $(subst .$(ARCHITECTURE).s,,$(wildcard ????-??-?.$(ARCHITECTURE).s))
 REF_PROGRAMS := $(subst .c,,$(wildcard ????-??-?-ref.c))
 
-all: $(REF_PROGRAMS)
+all: $(PROGRAMS) $(REF_PROGRAMS)
 
 clean:
-	$(RM) $(REF_PROGRAMS)
+	$(RM) *.o $(PROGRAMS) $(REF_PROGRAMS)
 
 $(REF_PROGRAMS): %: %.c
 	$(CC) -fpie -g -march=native -O3 -pie -Wall -Wno-main -o $@ $<
 
 Makefile.common.inc: mkmk
 	./mkmk > $@
+
+%.o: %.$(ARCHITECTURE).s
+	$(AS) $(ASFLAGS) -o $@ $^
 
 include Makefile.common.inc
