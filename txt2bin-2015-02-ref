@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+puts 'typedef struct {'
+puts "\tuint8_t length;"
+puts "\tuint8_t width;"
+puts "\tuint8_t height;"
+puts '} input_t;'
+puts 'static const input_t input[] = {'
+puts ARGF.readlines.map { |line| "\t{#{line.strip.split('x').join(',')}}" }.join(",\n")
+puts '};'

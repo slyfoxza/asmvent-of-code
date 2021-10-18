@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 mapping = {
-  '2015-01' => :str
+  '2015-01' => :str,
+  '2015-02' => :bin
 }
 
 mapping.each do |day, type|
@@ -8,6 +9,7 @@ mapping.each do |day, type|
     puts "#{day}-#{part}.$(ARCHITECTURE).s: #{day}.inc"
     puts "#{day}-#{part}-ref.c: #{day}-ref.h"
   end
+  type = "bin-#{day}" if type == :bin
   puts "#{day}.inc: #{day}.txt txt2#{type}; ./txt2#{type} $< > $@"
   puts "#{day}-ref.h: #{day}.txt txt2#{type}-ref; ./txt2#{type}-ref $< > $@"
 end
