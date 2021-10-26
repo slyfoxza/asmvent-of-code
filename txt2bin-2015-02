@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+# Reads each element of each record line into a separate array, and then
+# outputs each array sequentially in memory. That is, all lengths wil be output
+# as successive items, then all widths, and then all heights. This yields a
+# "structure of arrays" arrangement as opposed to the more typical "array of
+# structures", which makes efficient vectorisation possible.
+lengths = []
+widths = []
+heights = []
+ARGF.readlines.map { |line| line.strip.split('x') }.each do |record|
+  lengths << record[0]
+  widths << record[1]
+  heights << record[2]
+end
+
+output_stride = true
+# Data must be aligned at a 32-byte boundary, otherwise MOVDQA faults.
+puts '.align 32'
+puts '.Linput:'
+[lengths, widths, heights].each do |array|
+  puts ".int #{array.join(', ')}"
+  # Zero-pad the array to a 32-byte boundary before generating the next. The
+  # final array will also zero-padded, which allows the algorithm to treat the
+  # final elements uniformly.
+  puts '.align 32'
+  if output_stride
+    # For the first array, output the number of bytes that a single array spans
+    # as a compile-time constant.
+    puts '.set stride, . - .Linput'
+    output_stride = false
+  end
+end
