@@ -1,0 +1,16 @@
+.PHONY: all clean
+
+REF_PROGRAMS := $(subst .c,,$(wildcard ?-ref.c))
+
+all: $(REF_PROGRAMS)
+
+clean:
+	$(RM) $(REF_PROGRAMS)
+
+$(REF_PROGRAMS): %: %.c
+	$(CC) -fpie -g -march=native -O3 -pie -Wall -o $@ $<
+
+Makefile.inc: ../mkmk
+	../mkmk $(notdir $(CURDIR)) > $@
+
+include Makefile.inc

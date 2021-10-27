@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+transformation = {
+  '2015-01' => :str
+}
+
+[1, 2].each do |part|
+  puts "#{part}-ref.c: input.h"
+end
+
+transformation = transformation.fetch ARGV[0]
+script = transformation == :bin ? 'txt2bin' : "../txt2#{transformation}"
+puts "input.h: input.txt #{script}-ref; #{script}-ref $< > $@"
