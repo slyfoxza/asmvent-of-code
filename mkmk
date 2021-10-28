@@ -4,9 +4,11 @@ transformation = {
 }
 
 [1, 2].each do |part|
+  puts '$(addsuffix .$(ARCHITECTURE).s,$(ASM_PROGRAMS)): %.s: input.inc'
   puts "#{part}-ref.c: input.h"
 end
 
 transformation = transformation.fetch ARGV[0]
 script = transformation == :bin ? 'txt2bin' : "../txt2#{transformation}"
+puts "input.inc: input.txt #{script}; #{script} $< > $@"
 puts "input.h: input.txt #{script}-ref; #{script}-ref $< > $@"
