@@ -1,0 +1,2 @@
+#!/usr/bin/env ruby
+puts "static const int32_t input[] = {#{ARGF.lines.map(&:strip).join(', ')}};"

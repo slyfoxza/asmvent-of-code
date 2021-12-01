@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 transformation = {
-  '2015-01' => :str
+  '2015-01' => :str,
+
+  '2021-01' => :int
 }
 
 [1, 2].each do |part|

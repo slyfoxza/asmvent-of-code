@@ -1,0 +1,2 @@
+#!/usr/bin/env ruby
+puts ".Linput: .dc.l #{ARGF.lines.map(&:strip)}"
