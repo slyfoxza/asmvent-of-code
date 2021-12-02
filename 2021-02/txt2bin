@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+puts '.Linput:'
+bytes = ARGF.each_line.flat_map do |line|
+  bits = line.strip.split(nil, 2)
+  [bits.first[0].ord, bits.last]
+end
+puts ".dc.b #{bytes.join(', ')}"
+puts '.set input_end, .'
