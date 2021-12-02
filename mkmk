@@ -2,7 +2,8 @@
 transformation = {
   '2015-01' => :str,
 
-  '2021-01' => :int
+  '2021-01' => :int,
+  '2021-02' => :bin
 }
 
 [1, 2].each do |part|
@@ -11,6 +12,6 @@ transformation = {
 end
 
 transformation = transformation.fetch ARGV[0]
-script = transformation == :bin ? 'txt2bin' : "../txt2#{transformation}"
+script = transformation == :bin ? './txt2bin' : "../txt2#{transformation}"
 puts "input.inc: input.txt #{script}; #{script} $< > $@"
 puts "input.h: input.txt #{script}-ref; #{script}-ref $< > $@"

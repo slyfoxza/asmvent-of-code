@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+puts <<STRUCT
+typedef struct {
+  char direction;
+  uint8_t value;
+} input_t;
+static const input_t input[] = {
+STRUCT
+structs = ARGF.each_line.map do |line|
+  bits = line.strip.split(nil, 2)
+  "\t{'#{bits.first[0]}', #{bits.last}}"
+end
+puts structs.join(",\n")
+puts '};'
