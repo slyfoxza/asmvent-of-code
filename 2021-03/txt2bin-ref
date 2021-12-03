@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+lines = ARGF.each_line.map(&:strip)
+puts <<HEADER
+#define WIDTH #{lines.first.length}
+static const uint16_t MASK = 0b#{'1' * lines.first.length};
+static const uint16_t LENGTH = #{lines.length};
+static const uint16_t input[] = {#{lines.map { |x| "0b#{x}" }.join(', ')}};
+HEADER
