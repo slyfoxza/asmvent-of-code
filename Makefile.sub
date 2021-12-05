@@ -9,7 +9,7 @@ clean:
 	$(RM) $(REF_PROGRAMS)
 
 $(REF_PROGRAMS): %: %.c
-	$(CC) -fpie -g -march=native -O3 -pie -Wall -o $@ $<
+	$(CC) $(CFLAGS) -fpie -g -march=native -pie -Wall -o $@ $<
 
 %.o: %.$(ARCHITECTURE).s
 	$(AS) $(ASFLAGS) -o $@ $<

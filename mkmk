@@ -4,7 +4,8 @@ transformation = {
 
   '2021-01' => :int,
   '2021-02' => :bin,
-  '2021-03' => :bin
+  '2021-03' => :bin,
+  '2021-04' => :bin
 }
 
 [1, 2].each do |part|

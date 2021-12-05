@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+puts <<HEADER
+const uint8_t numbers[] = {#{ARGF.readline.strip}};
+int8_t boards[] = {#{ARGF.each_line.flat_map { |line| line.strip.split }.join(', ')}};
+HEADER

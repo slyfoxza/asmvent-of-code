@@ -10,6 +10,8 @@ else
 $(error Unsupported machine type $(uname_machine))
 endif
 
+export CFLAGS ?= -O3
+
 subdirs := $(wildcard 20??-??/)
 
 .PHONY: all clean $(subdirs)
