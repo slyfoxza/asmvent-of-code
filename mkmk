@@ -6,7 +6,8 @@ transformation = {
   '2021-02' => :bin,
   '2021-03' => :bin,
   '2021-04' => :bin,
-  '2021-06' => :csvint
+  '2021-06' => :csvint,
+  '2021-07' => :csvint
 }
 
 [1, 2].each do |part|
