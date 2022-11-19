@@ -1,0 +1,6 @@
+Makefile.input
+input.h
+input.inc
+
+?-asm
+?-reference

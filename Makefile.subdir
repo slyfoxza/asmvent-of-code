@@ -1,0 +1,17 @@
+.PHONY: all clean
+
+ASSEMBLY_PROGRAMS := $(subst .$(ARCHITECTURE).s,,$(wildcard ?-*.$(ARCHITECTURE).s))
+REFERENCE_PROGRAMS := $(subst .c,,$(wildcard ?-reference.c))
+
+all: $(ASSEMBLY_PROGRAMS) $(REFERENCE_PROGRAMS)
+clean:
+	$(RM) $(ASSEMBLY_PROGRAMS) $(REFERENCE_PROGRAMS) input.inc input.h Makefile.input
+
+$(REFERENCE_PROGRAMS): %: %.c
+	$(CC) $(CFLAGS) -fpie -g -march=native -pie -Wall -o $@ $<
+%.o: %.$(ARCHITECTURE).s
+	$(AS) $(ASFLAGS) -o $@ $<
+
+Makefile.input: ../makemake
+	../makemake $(notdir $(CURDIR)) > $@
+include Makefile.input

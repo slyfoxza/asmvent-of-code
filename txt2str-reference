@@ -1,0 +1,2 @@
+#!/usr/bin/env ruby
+puts %Q(static const char input[] = "#{ARGF.readline.strip}";)

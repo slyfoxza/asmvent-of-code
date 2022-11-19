@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+[1, 2].each do |part|
+  puts '$(addsuffix .$(ARCHITECTURE).s,$(ASSEMBLY_PROGRAMS)): %.s: input.inc' 
+  puts "#{part}-reference.c: input.h"
+end
+
+transformation = {
+  '2015-01' => :str,
+}
+
+transformation = transformation.fetch(ARGV[0], :bin)
+script = transformation == :bin ? './txt2bin' : "../txt2#{transformation}"
+puts "input.inc: input.txt #{script}; #{script} $< > $@"
+puts "input.h: input.txt #{script}-reference; #{script}-reference $< > $@"
