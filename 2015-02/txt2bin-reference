@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+puts <<STRUCT
+#include <stdint.h>
+typedef struct {
+\tuint8_t length;
+\tuint8_t width;
+\tuint8_t height;
+} input_t;
+static const input_t input[] = {
+STRUCT
+elements = ARGF.each_line.map { |line| "\t{#{line.strip.split('x', 3).join(',') }}" }
+puts elements.join(",\n")
+puts '};'
