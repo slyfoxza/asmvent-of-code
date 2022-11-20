@@ -4,16 +4,25 @@ l, w, h = input.reduce([[], [], []]) do |memo, element|
   memo.tap { (0..2).each { |i| memo[i] << element[i] } }
 end
 
+alignment = case ENV['ARCHITECTURE']
+  when 'x86-64'
+    # For x86-64, we target AVX2 which supports 32-byte/256-bit vectors.
+    32
+  else
+    # AArch64 without SVE (such as Graviton2) only supports up to 16-byte/128-bit vectors.
+    16
+  end
+
 output_stride = true
-# When loading this data, we'll use VMOVDQA, so data must be aligned to a 32-byte boundary.
-puts '.align 32'
+puts ".balign #{alignment}" unless alignment.nil?
 puts '.Linput:'
 [l, w, h].each do |array|
   puts ".int #{array.join(', ')}"
-  # Zero-pad the array to a 32-byte boundary. Due to the nature of the algorithm, these zero values
-  # will not have any effect on the result, which yields the nice property that we won't have to
-  # special-case handling of an "odd" number of final values that won't fill the SIMD register.
-  puts '.align 32'
+  # Zero-pad the array to an alignment boundary. Due to the nature of the algorithm, these zero
+  # values will not have any effect on the result, which yields the nice property that we won't
+  # have to special-case handling of an "odd" number of final values that won't fill the SIMD
+  # register.
+  puts ".balign #{alignment}" unless alignment.nil?
   if output_stride
     # For the first array, output the number of bytes that a single array spans as a compile-time
     # constant.

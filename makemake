@@ -10,5 +10,5 @@ transformation = {
 
 transformation = transformation.fetch(ARGV[0], :bin)
 script = transformation == :bin ? './txt2bin' : "../txt2#{transformation}"
-puts "input.inc: input.txt #{script}; #{script} $< > $@"
+puts "input.inc: input.txt #{script}; ARCHITECTURE=$(ARCHITECTURE) #{script} $< > $@"
 puts "input.h: input.txt #{script}-reference; #{script}-reference $< > $@"
